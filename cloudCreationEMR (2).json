@@ -1,0 +1,168 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "CloudFormation template for creating an EMR cluster with Spark",
+    "Parameters": {
+        "AdditionalMasterSecurityGroups": {
+            "Default": "sg-0fb796df006ef313c",
+            "Type": "CommaDelimitedList"
+        },
+        "AdditionalSlaveSecurityGroups": {
+            "Default": "sg-0be7ee3984689623c",
+            "Type": "CommaDelimitedList"
+        },
+        "ClusterName": {
+            "Default": "vishal",
+            "Type": "String"
+        },
+        "CoreInstanceBidPrice": {
+            "Default": 0.09,
+            "Type": "Number"
+        },
+        "CoreInstanceCount": {
+            "Default": 1,
+            "Type": "Number"
+        },
+        "CoreInstanceType": {
+            "Default": "m4.large",
+            "Type": "String"
+        },
+        "LogS3Bucket": {
+            "Default": "datawithoutborders",
+            "Type": "String"
+        },
+        "NotebookS3Bucket": {
+            "Default": "datawithoutborders",
+            "Type": "String"
+        },
+        "ZeppelinSparkSubmitOptions": {
+            "Default": "\"--repositories http://repo.npa.institute.s3-website-eu-west-1.amazonaws.com/release --packages ml.dmlc:xgboost4j-spark:0.5\"",
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "EmrCluster": {
+            "Properties": {
+                "Applications": [
+                    {
+                        "Name": "Spark"
+                    },
+                    {
+                        "Name": "Hive"
+                    }
+                ],
+                "Configurations": [
+                    {
+                        "Classification": "spark",
+                        "ConfigurationProperties": {
+                            "maximizeResourceAllocation": "true"
+                        }
+                    }
+                ],
+                "Instances": {
+                    "AdditionalMasterSecurityGroups": {
+                        "Ref": "AdditionalMasterSecurityGroups"
+                    },
+                    "AdditionalSlaveSecurityGroups": {
+                        "Ref": "AdditionalSlaveSecurityGroups"
+                    },
+                    "CoreInstanceGroup": {
+                        "BidPrice": {
+                            "Ref": "CoreInstanceBidPrice"
+                        },
+                        "InstanceCount": {
+                            "Ref": "CoreInstanceCount"
+                        },
+                        "InstanceType": {
+                            "Ref": "CoreInstanceType"
+                        },
+                        "Market": "SPOT",
+                        "Name": "Core"
+                    },
+                    "Ec2KeyName": "project",
+                    "MasterInstanceGroup": {
+                        "Configurations": [
+                            {
+                                "Classification": "zeppelin-env",
+                                "Configurations": [
+                                    {
+                                        "Classification": "export",
+                                        "ConfigurationProperties": {
+                                            "SPARK_SUBMIT_OPTIONS": {
+                                                "Ref": "ZeppelinSparkSubmitOptions"
+                                            },
+                                            "ZEPPELIN_NOTEBOOK_S3_BUCKET": {
+                                                "Ref": "NotebookS3Bucket"
+                                            },
+                                            "ZEPPELIN_NOTEBOOK_S3_USER": "zeppelin",
+                                            "ZEPPELIN_NOTEBOOK_STORAGE": "org.apache.zeppelin.notebook.repo.S3NotebookRepo"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "InstanceCount": 1,
+                        "InstanceType": "m4.large",
+                        "Market": "ON_DEMAND",
+                        "Name": "Master"
+                    }
+                },
+                "JobFlowRole": "EMR_EC2_DefaultRole",
+                "LogUri": {
+                    "Fn::Join": [
+                        "/",
+                        [
+                            "s3:/",
+                            {
+                                "Ref": "LogS3Bucket"
+                            },
+                            "logs",
+                            {
+                                "Ref": "ClusterName"
+                            }
+                        ]
+                    ]
+                },
+                "Name": {
+                    "Ref": "ClusterName"
+                },
+                "ReleaseLabel": "emr-5.32.0",
+                "ServiceRole": "EMR_DefaultRole",
+                "Tags": [
+                    {
+                        "Key": "Service",
+                        "Value": "EMR"
+                    },
+                    {
+                        "Key": "Cluster",
+                        "Value": {
+                            "Ref": "ClusterName"
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EMR::Cluster",
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "3f5d519a-9928-4af2-9ca6-0978f58215ee"
+                }
+            }
+        }
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "3f5d519a-9928-4af2-9ca6-0978f58215ee": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 60,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            }
+        }
+    }
+}
+
