@@ -1,8 +1,8 @@
 # PUBG Data Anaylsis
-### Introduction
-Player Unknown's Battlegrounds (PUBG), is a first person shooter game where the goal is to be the last player standing. You are placed on a giant circular map that shrinks as the game goes on, and you must find weapons, armor, and other supplies in order to kill other players / teams and survive.
-![Download-PUBG-Wallpaper](https://user-images.githubusercontent.com/63596869/105325185-528b3480-5bf2-11eb-9a18-fb188757eaa0.jpg)
-Being outside the playable area will slowly inflict damage on players until they either die or manage to run into the playable area before all their health is lost. The game can be played in Solo, Duo or Squad mode with up to 4 players. The goal of the game is obviously to be the last one standing to get the win.
+### Introduction  
+![Download-PUBG-Wallpaper](https://user-images.githubusercontent.com/63596869/105325185-528b3480-5bf2-11eb-9a18-fb188757eaa0.jpg)  
+
+Player Unknown's Battlegrounds (PUBG), is a first person shooter game where the goal is to be the last player standing. You are placed on a giant circular map that shrinks as the game goes on, and you must find weapons, armor, and other supplies in order to kill other players / teams and survive.Being outside the playable area will slowly inflict damage on players until they either die or manage to run into the playable area before all their health is lost. The game can be played in Solo, Duo or Squad mode with up to 4 players. The goal of the game is obviously to be the last one standing to get the win.
 PUBG can be played both in a first and third person perspective, and this is a choice the players select in the menu while matchmaking. When it comes to the esport scene, first-person is always the choice since it’s more skill-based and doesn’t allow you to peek around corners without exposing yourself. In the beginning of each game, all the players are gathered in a lobby until the amount of players reaches  90-100, and then a 1 minute timer starts.
 [Read More about PUBG](https://en.wikipedia.org/wiki/PlayerUnknown%27s_Battlegrounds)
 
