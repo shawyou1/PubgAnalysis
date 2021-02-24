@@ -119,7 +119,7 @@ death.printSchema()
 ![12](https://user-images.githubusercontent.com/63596869/105178464-130b0c80-5b4e-11eb-994a-1a3032fa1dc5.JPG)
 
 #### 5)Clean the data and store in parquet format:
-> from pyspark.sql.functions import split,regexp_replace
+> from pyspark.sql.functions import split,regexp_replace  
 split_col = pyspark.sql.functions.split(df['date'], 'T')
 match = df.select(split_col.getItem(0).alias('Date'),split_col.getItem(1).alias('Time'),"game_size","match_id","match_mode","party_size","player_assists","player_dbno","player_dist_ride","player_dist_walk","player_dmg","player_kills","player_name","player_survive_time","team_id","team_placement")
 
