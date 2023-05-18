@@ -1,4 +1,5 @@
 # PUBG Data Anaylsis
+https://public.tableau.com/views/PubgAnalysis/final_story
 ### Introduction  
 ![Download-PUBG-Wallpaper](https://user-images.githubusercontent.com/63596869/105325185-528b3480-5bf2-11eb-9a18-fb188757eaa0.jpg)  
 
